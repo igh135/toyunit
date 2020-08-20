@@ -1,0 +1,23 @@
+{
+	"version": 1,
+	"collections": [],
+	"environments": [
+		{
+			"id": "722818f8-3511-444f-8b6e-16532cf9d4eb",
+			"name": "My Workspace - globals",
+			"values": []
+		},
+		{
+			"id": "71cb7239-c194-4e7f-a298-cbf36a7837cc",
+			"name": "Team Workspace - globals",
+			"values": []
+		},
+		{
+			"id": "10764539-76a9-42e9-bd76-d654aeff7b1a",
+			"name": "toyproject - globals",
+			"values": []
+		}
+	],
+	"headerPresets": [],
+	"globals": []
+}
