@@ -15,8 +15,8 @@ class UserCreateView(CreateView):  # 2
 
     template_name = 'user/index.html'
 
-    def after(request):
-        return render(request, 'user/signup.html')
+    def after(self):
+        return render(self, 'user/signup.html')
 
 
 def user_new(request):
@@ -25,7 +25,7 @@ def user_new(request):
         if form.is_valid():
             user = form.save(commit=True)
             user.save()
-            return redirect('user/index.html',{})
+            return redirect('user/index.html', {'form': form})
     else:
         form = UserForm()
-    return render(request, 'user/signup.html',{})
+    return render(request, 'user/signup.html', {'form': form})
