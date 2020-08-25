@@ -1,6 +1,5 @@
 from audioop import tomono
 
-import self as self
 from django.contrib.auth.models import User
 from django.db import models
 
