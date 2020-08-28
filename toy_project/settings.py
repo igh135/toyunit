@@ -75,8 +75,8 @@ WSGI_APPLICATION = 'toy_project.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'dbmasteruser',
-        'USER': 'root',
+        'NAME': 'toyproject',
+        'USER': 'dbmasteruser',
         'PASSWORD': 'han000719*',
         'HOST': 'ls-fccb09c66f69dc0d1db4150da74716a58df88e86.cthaov5rklzx.ap-northeast-2.rds.amazonaws.com',
         'PORT': '3306',
