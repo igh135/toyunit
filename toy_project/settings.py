@@ -78,7 +78,7 @@ DATABASES = {
         'NAME': 'toyproject',
         'USER': 'dbmasteruser',
         'PASSWORD': 'han000719*',
-        'HOST': 'ls-7a2ef3abbc3d03fe1afff97de2d6ec2d337c2c55.cthaov5rklzx.ap-northeast-2.rds.amazonaws.com',
+        'HOST': '13.209.181.43',
         'PORT': '3306',
     }
 }
