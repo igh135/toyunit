@@ -1,8 +1,12 @@
 from django.shortcuts import render
 
 # Create your views here.
+from django.template.context_processors import request
 from django.views.generic import ListView
 
+import vote
+from vote.models import Vote
 
-def post_list(request):
-    return render(request, 'vote/post_list.html', {})
+
+class VoteLV(ListView):
+    model = Vote

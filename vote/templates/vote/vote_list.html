@@ -5,7 +5,9 @@
     <title>Title</title>
 </head>
 <body>
-<li>{{page_obj.vote}}</li>
+{% for vote in object_list  %}
+<li>{{vote.vote_name}}</li>
+{% endfor %}
 </body>
 </html>
 

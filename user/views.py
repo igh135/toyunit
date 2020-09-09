@@ -8,6 +8,7 @@ from django.views.generic.base import View
 
 from django.views.generic import CreateView
 from .forms import UserForm
+from .models import User
 
 
 class UserCreateView(CreateView):  # 2
@@ -22,10 +23,10 @@ class UserCreateView(CreateView):  # 2
 def user_new(request):
     if request.method == "POST":
         form = UserForm(request.POST)
-        if form.is_valid():
+        if form.is_valid() and form != User:
             user = form.save(commit=True)
             user.save()
-            return redirect('user/index.html', {'form': form})
+            return redirect('/user', {'form': form})
     else:
         form = UserForm()
     return render(request, 'user/signup.html', {'form': form})

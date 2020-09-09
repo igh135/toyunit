@@ -3,7 +3,8 @@ from django.urls import path, include
 
 import user
 from vote import views, models
+from vote.views import VoteLV
 
 urlpatterns = [
-    path('', views.post_list, name='post_list'),
+    path('', VoteLV.as_view(), name='vote_list'),
 ]
