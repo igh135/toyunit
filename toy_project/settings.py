@@ -22,9 +22,9 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SECRET_KEY = '!e=0gqg*&4@@x^y*^9lgyu7%zd-9qmz@jwm99mou9uzfid4z^+'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG =True
+DEBUG =False
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ["54.180.61.126"]
 
 # Application definition
 
@@ -75,10 +75,10 @@ WSGI_APPLICATION = 'toy_project.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'toyproject',
-        'USER': 'root',
+        'NAME': 'dbmaster',
+        'USER': 'dbmasteruser',
         'PASSWORD': 'han000719*',
-        'HOST': '127.0.0.1',
+        'HOST': '13.209.181.43',
         'PORT': '3306',
     }
 }
