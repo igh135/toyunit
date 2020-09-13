@@ -22,8 +22,13 @@ class VoteView(CreateAPIView):
     queryset = Vote.objects.all()
     serializer_class = VoteSerializer
 
+class VoteImgView(CreateAPIView):
+    queryset = Lunar.objects.all()
+    serializer_class = LunarSerializer
 
 class VoteGetView(ListAPIView):
     queryset = Vote.objects.all()
     serializer_class = VoteSerializer
 
+    def voteImg(self):
+        return HttpResponse(Lunar.prof_img)
