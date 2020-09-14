@@ -20,7 +20,8 @@ from django.urls import path, include
 from user import views
 
 urlpatterns = [
-    path('user/', include('user.urls'),name='user'),
-    path('vote/', include('vote.urls')),
+    path('lunar/',include('lunar.urls')),
+    path('user/', include('user.urls')),
+    path('', include('vote.urls')),
     path('admin/', admin.site.urls),
 ]

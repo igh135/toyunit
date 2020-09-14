@@ -6,7 +6,7 @@ from django.shortcuts import render
 # Create your views here.
 from django.template.context_processors import request
 from django.views.generic import ListView
-from rest_framework.generics import CreateAPIView, ListAPIView
+from rest_framework.generics import CreateAPIView, ListAPIView, RetrieveAPIView, UpdateAPIView
 from rest_framework.views import APIView
 
 import lunar
@@ -22,9 +22,11 @@ class VoteView(CreateAPIView):
     queryset = Vote.objects.all()
     serializer_class = VoteSerializer
 
+
 class VoteImgView(CreateAPIView):
     queryset = Lunar.objects.all()
     serializer_class = LunarSerializer
+
 
 class VoteGetView(ListAPIView):
     queryset = Vote.objects.all()
@@ -32,3 +34,9 @@ class VoteGetView(ListAPIView):
 
     def voteImg(self):
         return HttpResponse(Lunar.prof_img)
+
+
+class VoteCountView(UpdateAPIView):
+    lookup_field = 'vote_cnt'
+    serializer_class = VoteSerializer
+
