@@ -80,7 +80,7 @@ DATABASES = {
         'NAME': 'toyproject',
         'USER': 'dbmasteruser',
         'PASSWORD': 'han000719*',
-        'HOST': '13.209.181.43',
+        'HOST': '172.26.4.112',
         'PORT': '3306',
     }
 }
