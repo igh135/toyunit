@@ -79,7 +79,7 @@ DATABASES = {
         'ENGINE': 'django.db.backends.mysql',
         'NAME': 'toyproject',
         'USER': 'dbmasteruser',
-        'PASSWORD': 'han000719*',
+        'PASSWORD': 'han00719()',
         'HOST': '13.209.181.43',
         'PORT': '3306',
     }
