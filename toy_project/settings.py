@@ -78,9 +78,9 @@ DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
         'NAME': 'toyproject',
-        'USER': 'dbmasteruser',
+        'USER': 'root',
         'PASSWORD': 'han000719*',
-        'HOST': 'ls-7a2ef3abbc3d03fe1afff97de2d6ec2d337c2c55.cthaov5rklzx.ap-northeast-2.rds.amazonaws.com',
+        'HOST': '127.0.0.1',
         'PORT': '3306',
     }
 }
