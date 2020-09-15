@@ -77,7 +77,7 @@ WSGI_APPLICATION = 'toy_project.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'toyproject',
+        'NAME': 'toy_project',
         'USER': 'dbmasteruser',
         'PASSWORD': 'han000719*',
         'HOST': '13.209.181.43',
