@@ -14,5 +14,5 @@ urlpatterns = [
     path('enroll', VoteView.as_view()),
     path('img', VoteGetView.voteImg),
     path('enroll/img', VoteImgView.as_view()),
-    path('list', VoteCountView.cntUpdate),
+    path('list', VoteCountView.as_view()),
 ]
