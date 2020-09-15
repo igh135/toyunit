@@ -3,6 +3,8 @@ import bcrypt
 import jwt
 from django.contrib.auth.models import User
 from django.http import JsonResponse, HttpResponse
+from django.shortcuts import redirect
+from django.views.generic.base import View
 from rest_framework.generics import DestroyAPIView, CreateAPIView
 from rest_framework.views import APIView
 from rest_framework.response import Response
@@ -39,6 +41,20 @@ class UserDeleteView(DestroyAPIView):
     serializer_class = UserSerializer
 
 
-class SignIn(CreateAPIView):
-    queryset = User.objects.all()
-    serializer_class = UserSerializer
+class LoginView(View):
+    def post(self, request):
+        data = json.loads(request.body)
+        User(
+            UserID=data['UserID'],
+            name=data['name'],
+            password=data['password']
+        )
+
+        if User.objects.filter(UserID=data['UserID'], password=data['password']).exists() == True:
+            return JsonResponse({"message": "로그인에 성공하셨습니다."}, status=200)
+        else:
+            return JsonResponse({"message": "아이디나 비밀번호가 일치하지 않습니다."}, status=401),redirect('/')
+
+    def get(self, request):
+        user = User.objects.values()
+        return JsonResponse({"list": list(user)}, status=200)

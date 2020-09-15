@@ -1,10 +1,13 @@
 from audioop import tomono
 
-from django.contrib.auth.models import User
+
 from django.db import models
 
 # Create your models here.
+from self import self
+
 from lunar.models import Lunar
+from user.models import User
 
 
 class Vote(models.Model):

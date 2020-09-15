@@ -37,6 +37,8 @@ class VoteGetView(ListAPIView):
 
 
 class VoteCountView(UpdateAPIView):
-    lookup_field = 'vote_cnt'
+    queryset = Vote.objects.all()
     serializer_class = VoteSerializer
 
+    def cntUpdate(self, serializer):
+        serializer.save(vote_cnt=self.request.vote_cnt+1)
