@@ -14,16 +14,17 @@ from .serializers import UserSerializer
 from rest_framework import status
 
 
-class UserView(APIView):
+class UserView(CreateAPIView):
     queryset = User.objects.all()
     serializer_class = UserSerializer
+
 
 class UserDeleteView(DestroyAPIView):
     queryset = User.objects.all()
     serializer_class = UserSerializer
 
 
-class LoginView(RetrieveAPIView):
+class LoginView(APIView):
     queryset = User.objects.all()
     serializer_class = UserSerializer
 
