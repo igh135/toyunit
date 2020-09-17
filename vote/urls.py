@@ -3,7 +3,6 @@ from urllib import request
 from django.contrib import admin
 from django.urls import path, include
 from rest_framework import request
-from self import self
 
 import user
 from vote import views, models

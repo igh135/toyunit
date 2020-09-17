@@ -35,3 +35,7 @@ class VoteGetView(ListAPIView):
     def voteImg(self):
         return HttpResponse(Lunar.prof_img)
 
+class VoteCountView(UpdateAPIView):
+    queryset = Vote.objects.all()
+    serializer_class = VoteSerializer
+
