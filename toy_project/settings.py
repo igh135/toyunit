@@ -39,6 +39,7 @@ INSTALLED_APPS = [
     'vote',
     'rest_framework',
     'lunar',
+    'rest_auth.registration',
 ]
 
 MIDDLEWARE = [
@@ -85,7 +86,16 @@ DATABASES = {
         'PORT': '3306',
     }
 }
-
+REST_FRAMEWORK = {
+    'DEFAULT_PERMISSION_CLASSES': (
+        'rest_framework.permissions.IsAuthenticated',
+    ),
+    'DEFAULT_AUTHENTICATION_CLASSES': (
+        'rest_framework_jwt.authentication.JSONWebTokenAuthentication',
+        #'rest_framework.authentication.SessionAuthentication',
+        #'rest_framework.authentication.BasicAuthentication',
+    ),
+}
 # Password validation
 # https://docs.djangoproject.com/en/3.0/ref/settings/#auth-password-validators
 
@@ -121,3 +131,12 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/3.0/howto/static-files/
 
 STATIC_URL = '/static/'
+
+#ACCOUNT_EMAIL_REQUIRED = True
+ACCOUNT_EMAIL_REQUIRED = False
+
+#ACCOUNT_EMAIL_VERIFICATION = "mandatory"
+ACCOUNT_EMAIL_VERIFICATION = "none"
+
+REST_USE_JWT = True
+ACCOUNT_LOGOUT_ON_GET = True

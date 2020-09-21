@@ -20,8 +20,9 @@ from django.urls import path, include
 from user import views
 
 urlpatterns = [
-    path('lunar/',include('lunar.urls')),
+    path('lunar/', include('lunar.urls')),
     path('user/', include('user.urls')),
     path('', include('vote.urls')),
     path('admin/', admin.site.urls),
+
 ]
