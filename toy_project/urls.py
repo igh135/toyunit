@@ -23,7 +23,7 @@ urlpatterns = [
     path('lunar/', include('lunar.urls')),
     path('', include('vote.urls')),
     path('admin/', admin.site.urls),
-    path("user/", include("user.urls")),
-    path("user/auth", include("knox.urls")),
+    path("api/", include("user.urls")),
+    path("api/auth", include("knox.urls")),
 ]
 
