@@ -24,7 +24,7 @@ SECRET_KEY = '!e=0gqg*&4@@x^y*^9lgyu7%zd-9qmz@jwm99mou9uzfid4z^+'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG =True
 
-ALLOWED_HOSTS = ["54.180.61.126","127.0.0.1"]
+ALLOWED_HOSTS = ["54.180.61.126","127.0.0.1","laptop-n5q55t50"]
 
 # Application definition
 
@@ -39,7 +39,7 @@ INSTALLED_APPS = [
     'vote',
     'rest_framework',
     'lunar',
-    'rest_auth.registration',
+    'knox',
 ]
 
 MIDDLEWARE = [
@@ -87,14 +87,15 @@ DATABASES = {
     }
 }
 REST_FRAMEWORK = {
+
     'DEFAULT_PERMISSION_CLASSES': (
         'rest_framework.permissions.IsAuthenticated',
     ),
-    'DEFAULT_AUTHENTICATION_CLASSES': (
-        'rest_framework_jwt.authentication.JSONWebTokenAuthentication',
-        #'rest_framework.authentication.SessionAuthentication',
-        #'rest_framework.authentication.BasicAuthentication',
-    ),
+    "DEFAULT_AUTHENTICATION_CLASSES": ("knox.auth.TokenAuthentication",
+                                       'rest_framework.authentication.SessionAuthentication',
+                                       'rest_framework.authentication.BasicAuthentication',
+                                       )
+
 }
 # Password validation
 # https://docs.djangoproject.com/en/3.0/ref/settings/#auth-password-validators
@@ -138,5 +139,4 @@ ACCOUNT_EMAIL_REQUIRED = False
 #ACCOUNT_EMAIL_VERIFICATION = "mandatory"
 ACCOUNT_EMAIL_VERIFICATION = "none"
 
-REST_USE_JWT = True
-ACCOUNT_LOGOUT_ON_GET = True
+

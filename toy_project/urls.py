@@ -21,8 +21,9 @@ from user import views
 
 urlpatterns = [
     path('lunar/', include('lunar.urls')),
-    path('user/', include('user.urls')),
     path('', include('vote.urls')),
     path('admin/', admin.site.urls),
-
+    path("user/", include("user.urls")),
+    path("user/auth", include("knox.urls")),
 ]
+

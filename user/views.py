@@ -1,62 +1,58 @@
-import json
-import bcrypt
-import jwt
-
-from toy_project.settings import SECRET_KEY
-from .models import User
-
-from django.views import View
-from django.http import JsonResponse, HttpResponse
+# api/views.py
+from rest_framework import viewsets, permissions, generics, status
+from rest_framework.response import Response
+from rest_framework.views import APIView
+from rest_framework.decorators import api_view
+from knox.models import AuthToken
+from .serializers import CreateUserSerializer, UserSerializer, LoginUserSerializer
 
 
-def post(self, request):
-    if request == request.POST:
-        data = json.loads(request.body)
-        try:
-            if User.objects.filter(UserID=data['UserID']).exists():
-                return HttpResponse(status=400)
-
-            # == 비밀번호 암호화==#
-
-            password = data['password'].encode('utf-8')  # 입력된 패스워드를 바이트 형태로 인코딩
-            password_crypt = bcrypt.hashpw(password, bcrypt.gensalt())  # 암호화된 비밀번호 생성
-            password_crypt = password_crypt.decode('utf-8')  # DB에 저장할 수 있는 유니코드 문자열 형태로 디코딩
-
-            # ====================#
-
-            User(
-                UserID=data['UserID'],
-                password=password_crypt,  # 암호화된 비밀번호를 DB에 저장
-                name=data['name']
-            ).save()
-
-            return HttpResponse(status=200)
-        except KeyError:
-            return JsonResponse({"message": "INVALID_KEYS"}, status=400)
+# Create your views here.
+@api_view(["GET"])
+def HelloAPI(request):
+    return Response("hello world!")
 
 
-class SignInView(View):
-    def post(self, request):
-        data = json.loads(request.body)
+class RegistrationAPI(generics.GenericAPIView):
+    serializer_class = CreateUserSerializer
 
-        try:
-            if User.objects.filter(UserID=data['UserID']).exists():
-                user = User.objects.get(UserID=data['UserID'])
+    def post(self, request, *args, **kwargs):
+        if len(request.data["username"]) < 6 or len(request.data["password"]) < 4:
+            body = {"message": "short field"}
+            return Response(body, status=status.HTTP_400_BAD_REQUEST)
+        serializer = self.get_serializer(data=request.data)
+        serializer.is_valid(raise_exception=True)
+        user = serializer.save()
+        return Response(
+            {
+                "user": UserSerializer(
+                    user, context=self.get_serializer_context()
+                ).data,
+                "token": AuthToken.objects.create(user),
+            }
+        )
 
-                if bcrypt.checkpw(data['password'].encode('utf-8'), user.password.encode('utf-8')):
 
-                    # ----------토큰 발행----------#
+class LoginAPI(generics.GenericAPIView):
+    serializer_class = LoginUserSerializer
 
-                    token = jwt.encode({'UserID': data['UserID']}, SECRET_KEY, algorithm="HS256")
-                    token = token.decode('utf-8')  # 유니코드 문자열로 디코딩
+    def post(self, request, *args, **kwargs):
+        serializer = self.get_serializer(data=request.data)
+        serializer.is_valid(raise_exception=True)
+        user = serializer.validated_data
+        return Response(
+            {
+                "user": UserSerializer(
+                    user, context=self.get_serializer_context()
+                ).data,
+                "token": AuthToken.objects.create(user)[1],
+            }
+        )
 
-                    # -----------------------------#
-                    return JsonResponse({"token": token}, status=200)
 
-                else:
-                    return HttpResponse(status=401)
+class UserAPI(generics.RetrieveAPIView):
+    permission_classes = [permissions.IsAuthenticated]
+    serializer_class = UserSerializer
 
-            return HttpResponse(status=400)
-
-        except KeyError:
-            return JsonResponse({"message": "INVALID_KEYS"}, status=400)
+    def get_object(self):
+        return self.request.user
